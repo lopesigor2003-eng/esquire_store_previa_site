@@ -6,8 +6,7 @@ import {
   ShieldCheck,
   ChevronRight,
   ExternalLink,
-  Star,
-  Building2
+  Star
 } from 'lucide-react';
 import { STORE_CONTACT } from '../data/storeData';
 
@@ -16,7 +15,6 @@ export default function Footer() {
 
   const quickLinks = [
     { href: '#inicio', label: 'Início' },
-    { href: '#sobre', label: 'Sobre a Loja' },
     { href: '#produtos', label: 'Dispositivos Homologados' },
     { href: '#depoimentos', label: 'Avaliações Google' },
     { href: '#localizacao', label: 'Sede na Torre Caridade' },
@@ -33,7 +31,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#040712] text-white border-t border-white/10">
+    <footer className="bg-[#05081A] text-[#F7F8F7] border-t border-[#F7F8F7]/10">
       
       {/* Upper Footer: Brand, Navigation & Contact */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
@@ -42,43 +40,41 @@ export default function Footer() {
           {/* Brand Info & Mission */}
           <div className="lg:col-span-4 space-y-5">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-[#0C1630] border border-white/20 overflow-hidden flex items-center justify-center shrink-0 shadow-sm">
+              {/* Logo transparent without background */}
+              <div className="w-12 h-12 flex items-center justify-center shrink-0">
                 <img
                   src={STORE_CONTACT.logoUrl}
                   alt="Esquire's Store"
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
+                  className="w-full h-full object-contain drop-shadow"
                 />
               </div>
               <div>
-                <span className="font-extrabold text-xl text-white tracking-tight leading-none block">
+                <span className="font-extrabold text-xl text-[#F7F8F7] tracking-tight leading-none block">
                   ESQUIRE’S STORE
                 </span>
-                <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-widest mt-1 block">
+                <span className="text-[11px] font-semibold text-[#F6A70D] uppercase tracking-widest mt-1 block">
                   Loja de iPhone & Eletrônicos Premium
                 </span>
               </div>
             </div>
 
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm text-[#F7F8F7]/80 leading-relaxed">
               Referência em comércio de tecnologia premium em Santa Maria e região central do Rio Grande do Sul. Atendimento corporativo e presencial com produtos homologados e garantia oficial.
             </p>
 
-            <div className="p-3.5 rounded-lg bg-[#070D1E] border border-white/10 text-xs space-y-1">
+            <div className="p-3.5 rounded-lg bg-[#0A0F2F] border border-[#F7F8F7]/10 text-xs space-y-1">
               <div className="flex items-center gap-2">
-                <div className="flex text-white">
+                <div className="flex text-[#F6A70D]">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-white text-white" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#F6A70D]" />
                   ))}
                 </div>
-                <span className="font-bold text-white">5.0 / 5.0</span>
-                <span className="text-slate-400">· 28 avaliações auditadas no Google</span>
+                <span className="font-bold text-[#F7F8F7]">5.0 / 5.0</span>
+                <span className="text-[#F7F8F7]/60">· 28 avaliações auditadas no Google</span>
               </div>
-              <p className="text-slate-400 text-[11px]">
+              <p className="text-[#F7F8F7]/60 text-[11px]">
                 Ficha oficial pública no Google Maps de Santa Maria - RS
               </p>
             </div>
@@ -89,7 +85,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Perfil da Esquire's Store no Instagram"
-                className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/15 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                className="w-10 h-10 rounded-lg bg-[#0A0F2F] hover:bg-[#F6A70D] hover:text-[#0A0F2F] text-[#F7F8F7] flex items-center justify-center transition-colors border border-[#F7F8F7]/15 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
               >
                 <Instagram className="w-5 h-5" />
               </a>
@@ -99,7 +95,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Conversar com a Esquire's Store no WhatsApp"
-                className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/15 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                className="w-10 h-10 rounded-lg bg-[#0A0F2F] hover:bg-[#F6A70D] hover:text-[#0A0F2F] text-[#F7F8F7] flex items-center justify-center transition-colors border border-[#F7F8F7]/15 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
               >
                 <MessageCircle className="w-5 h-5" />
               </a>
@@ -109,7 +105,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Localização no Google Maps"
-                className="w-10 h-10 rounded-lg bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition-colors border border-white/15 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+                className="w-10 h-10 rounded-lg bg-[#0A0F2F] hover:bg-[#F6A70D] hover:text-[#0A0F2F] text-[#F7F8F7] flex items-center justify-center transition-colors border border-[#F7F8F7]/15 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
               >
                 <MapPin className="w-5 h-5" />
               </a>
@@ -118,17 +114,17 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Navegação Institucional
+            <h4 className="text-xs font-bold text-[#F6A70D] uppercase tracking-wider">
+              Navegação
             </h4>
             <ul className="space-y-2.5 text-sm">
               {quickLinks.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded"
+                    className="text-[#F7F8F7]/80 hover:text-[#F6A70D] transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none rounded"
                   >
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[#F6A70D]" />
                     <span>{item.label}</span>
                   </a>
                 </li>
@@ -138,17 +134,17 @@ export default function Footer() {
 
           {/* Product Categories */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Linhas Disponíveis
+            <h4 className="text-xs font-bold text-[#F6A70D] uppercase tracking-wider">
+              iPhones Disponíveis
             </h4>
             <ul className="space-y-2.5 text-sm">
               {categories.map((cat, i) => (
                 <li key={i}>
                   <a
                     href={cat.href}
-                    className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none rounded"
+                    className="text-[#F7F8F7]/80 hover:text-[#F6A70D] transition-colors flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none rounded"
                   >
-                    <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ChevronRight className="w-3.5 h-3.5 text-[#F6A70D]" />
                     <span>{cat.label}</span>
                   </a>
                 </li>
@@ -158,45 +154,45 @@ export default function Footer() {
 
           {/* Contact & Legal Identity */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Unidade Física & Dados Legais
+            <h4 className="text-xs font-bold text-[#F6A70D] uppercase tracking-wider">
+              Sede Física & Dados
             </h4>
 
-            <div className="space-y-3 text-xs text-slate-300">
+            <div className="space-y-3 text-xs text-[#F7F8F7]/80">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-white shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-[#F6A70D] shrink-0 mt-0.5" />
                 <span>
                   {STORE_CONTACT.address}
                 </span>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <MessageCircle className="w-4 h-4 text-[#F6A70D] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-white font-semibold">WhatsApp Oficial: {STORE_CONTACT.phone}</span>
+                  <span className="block text-[#F7F8F7] font-semibold">WhatsApp: {STORE_CONTACT.phone}</span>
                   <a
                     href={STORE_CONTACT.whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white hover:underline inline-flex items-center gap-1 mt-0.5 font-medium"
+                    className="text-[#F6A70D] hover:underline inline-flex items-center gap-1 mt-0.5 font-medium"
                   >
-                    <span>Iniciar conversa no WhatsApp</span>
+                    <span>Iniciar conversa</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-2.5">
-                <Clock className="w-4 h-4 text-white shrink-0 mt-0.5" />
+                <Clock className="w-4 h-4 text-[#F6A70D] shrink-0 mt-0.5" />
                 <div>
-                  <span className="block text-white font-medium">{STORE_CONTACT.hours}</span>
-                  <span className="text-[11px] text-slate-400">Atendimento presencial com agendamento opcional</span>
+                  <span className="block text-[#F7F8F7] font-medium">{STORE_CONTACT.hours}</span>
+                  <span className="text-[11px] text-[#F7F8F7]/60">Atendimento presencial com total privacidade</span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-white/10 text-[11px] text-slate-400 space-y-0.5">
-                <p><strong className="text-slate-300">Razão Social:</strong> {STORE_CONTACT.legalName}</p>
-                <p className="font-mono"><strong className="text-slate-300">CNPJ:</strong> {STORE_CONTACT.cnpj}</p>
+              <div className="pt-2 border-t border-[#F7F8F7]/10 text-[11px] text-[#F7F8F7]/60 space-y-0.5">
+                <p><strong className="text-[#F7F8F7]">Razão Social:</strong> {STORE_CONTACT.legalName}</p>
+                <p className="font-mono"><strong className="text-[#F7F8F7]">CNPJ:</strong> {STORE_CONTACT.cnpj}</p>
               </div>
             </div>
           </div>
@@ -204,19 +200,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Mandatory Copyright & Compliance Bar */}
-      <div className="bg-[#02040B] border-t border-white/10 py-6 text-xs text-slate-400">
+      {/* Copyright Bar */}
+      <div className="bg-[#030510] border-t border-[#F7F8F7]/10 py-6 text-xs text-[#F7F8F7]/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-center sm:text-left text-slate-300">
+          <p className="text-center sm:text-left text-[#F7F8F7]/70">
             © {currentYear} Esquire's Store. Todos os direitos reservados.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-slate-300">
-            <span className="flex items-center gap-1.5 text-white">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              Equipamentos 100% Homologados com 12 Meses de Garantia
+          <div className="flex flex-wrap items-center justify-center gap-4 text-[#F7F8F7]/70">
+            <span className="flex items-center gap-1.5 text-[#F7F8F7]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#F6A70D]" />
+              Equipamentos Homologados com 12 Meses de Garantia
             </span>
-            <span aria-hidden="true" className="text-white/20">|</span>
-            <span className="text-white font-medium">Santa Maria - Rio Grande do Sul</span>
+            <span aria-hidden="true" className="text-[#F7F8F7]/20">|</span>
+            <span className="text-[#F7F8F7] font-medium">Santa Maria - Rio Grande do Sul</span>
           </div>
         </div>
       </div>

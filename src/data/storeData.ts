@@ -496,7 +496,7 @@ export const STORE_CONTACT = {
     saturday: "Sábado: 09:00 às 18:00 (Atendimento presencial e agendado)",
     sunday: "Domingo: Plantão consultivo corporativo via WhatsApp"
   },
-  logoUrl: "https://i.postimg.cc/G2k9LD28/images.jpg",
+  logoUrl: "https://i.postimg.cc/9MFFFRwq/images-removebg-preview.png",
   protocols: [
     "Conferência presencial do IMEI na base oficial da Apple antes da compra",
     "Aparelhos novos entregues com lacre de fábrica inviolado e 1 ano de garantia mundial",

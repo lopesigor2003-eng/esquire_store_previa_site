@@ -33,16 +33,16 @@ export default function ImageModal({ image, onClose }: ImageModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative max-w-4xl w-full bg-[#0C1630] rounded-2xl overflow-hidden border border-white/20 shadow-2xl flex flex-col"
+        className="relative max-w-4xl w-full bg-[#0F1742] rounded-2xl overflow-hidden border border-[#F7F8F7]/20 shadow-2xl flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Top Bar */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10 bg-[#070D1E]">
+        <div className="flex items-center justify-between p-4 border-b border-[#F7F8F7]/10 bg-[#0A0F2F]">
           <div>
-            <span className="text-xs uppercase font-bold text-slate-300 tracking-wider">
+            <span className="text-xs uppercase font-bold text-[#F6A70D] tracking-wider">
               {image.category}
             </span>
-            <h3 id="modal-image-title" className="text-base font-bold text-white">
+            <h3 id="modal-image-title" className="text-base font-bold text-[#F7F8F7]">
               {image.title}
             </h3>
           </div>
@@ -50,7 +50,7 @@ export default function ImageModal({ image, onClose }: ImageModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="p-2 text-slate-300 hover:text-white hover:bg-white/10 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+            className="p-2 text-[#F7F8F7]/70 hover:text-[#F6A70D] hover:bg-[#F7F8F7]/10 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
             aria-label="Fechar visualização da imagem"
           >
             <X className="w-5 h-5" />
@@ -58,7 +58,7 @@ export default function ImageModal({ image, onClose }: ImageModalProps) {
         </div>
 
         {/* Modal Image Area */}
-        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-black flex items-center justify-center overflow-hidden">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full bg-[#060A20] flex items-center justify-center overflow-hidden">
           <img
             src={image.url}
             alt={image.alt}
@@ -67,9 +67,9 @@ export default function ImageModal({ image, onClose }: ImageModalProps) {
         </div>
 
         {/* Modal Footer Bar */}
-        <div className="p-4 bg-[#070D1E] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border-t border-white/10">
-          <span className="text-slate-300 flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-white" />
+        <div className="p-4 bg-[#0A0F2F] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs border-t border-[#F7F8F7]/10">
+          <span className="text-[#F7F8F7]/80 flex items-center gap-1.5">
+            <MapPin className="w-3.5 h-3.5 text-[#F6A70D]" />
             Rua Venâncio Aires, 1434 – Torre Caridade, Sala 214, Santa Maria - RS
           </span>
 
@@ -77,7 +77,7 @@ export default function ImageModal({ image, onClose }: ImageModalProps) {
             href={image.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-white hover:underline font-bold"
+            className="inline-flex items-center gap-1.5 text-[#F6A70D] hover:underline font-bold"
           >
             <span>Ver no perfil oficial do Google Maps</span>
             <ExternalLink className="w-3.5 h-3.5" />

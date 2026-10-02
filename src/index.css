@@ -4,8 +4,8 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: #070D1E;
-    color: #FFFFFF;
+    background-color: #0A0F2F;
+    color: #F7F8F7;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -14,21 +14,28 @@
   }
 }
 
-/* Custom modern scrollbar: Deep Navy & Clean White/Silver */
+/* Custom scrollbar: #0A0F2F & #F6A70D */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070D1E;
+  background: #0A0F2F;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1C2B54;
-  border-radius: 3px;
+  background: #141E55;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #FFFFFF;
+  background: #F6A70D;
+}
+
+/* Smooth motion utility classes */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-reveal {
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 }

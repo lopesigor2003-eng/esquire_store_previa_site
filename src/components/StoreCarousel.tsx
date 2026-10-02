@@ -69,18 +69,18 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
     >
       {/* Top minimal bar */}
       <div className="flex items-center justify-between mb-4 px-1 text-xs">
-        <span className="text-slate-300 font-semibold uppercase tracking-wider">
+        <span className="text-[#F7F8F7]/80 font-semibold uppercase tracking-wider">
           Estrutura Física · Sala 214 Torre Caridade
         </span>
         <div className="flex items-center gap-3">
-          <span className="font-mono text-white text-xs bg-[#0C1630] border border-white/15 px-2.5 py-1 rounded">
+          <span className="font-mono text-[#F6A70D] text-xs bg-[#0F1742] border border-[#F7F8F7]/15 px-2.5 py-1 rounded">
             0{currentIndex + 1} / 0{totalPhotos}
           </span>
           <a
             href={STORE_CONTACT.mapsLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white hover:underline inline-flex items-center gap-1 font-semibold"
+            className="text-[#F6A70D] hover:underline inline-flex items-center gap-1 font-semibold"
           >
             <span>Google Maps</span>
             <ExternalLink className="w-3.5 h-3.5" />
@@ -90,7 +90,7 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
 
       {/* Main Photo Frame: Authentic Portrait Format (3:4 ratio, 1200x1600) */}
       <div
-        className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-[#050A18] border border-white/20 shadow-2xl group cursor-pointer"
+        className="relative aspect-[3/4] w-full rounded-2xl overflow-hidden bg-[#060A20] border border-[#F7F8F7]/15 shadow-2xl group cursor-pointer"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -112,23 +112,23 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
                 alt={photo.alt}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-contain bg-[#050A18]"
+                className="w-full h-full object-contain bg-[#060A20]"
               />
 
               {/* Hover Zoom Prompt */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-black/20">
-                <span className="bg-[#070D1E]/90 text-white px-4 py-2 rounded-full border border-white/30 flex items-center gap-2 text-xs font-semibold shadow-lg backdrop-blur-sm">
-                  <ZoomIn className="w-4 h-4 text-white" />
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-black/30">
+                <span className="bg-[#0A0F2F]/90 text-[#F7F8F7] px-4 py-2 rounded-full border border-[#F6A70D]/40 flex items-center gap-2 text-xs font-semibold shadow-lg backdrop-blur-sm">
+                  <ZoomIn className="w-4 h-4 text-[#F6A70D]" />
                   Clique para ampliar
                 </span>
               </div>
 
               {/* Discreet bottom overlay with title */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-5 text-white pointer-events-none">
-                <p className="text-sm sm:text-base font-semibold text-white">
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-5 text-[#F7F8F7] pointer-events-none">
+                <p className="text-sm sm:text-base font-semibold text-[#F7F8F7]">
                   {photo.title}
                 </p>
-                <p className="text-xs text-slate-300 mt-0.5">
+                <p className="text-xs text-[#F7F8F7]/80 mt-0.5">
                   {photo.caption}
                 </p>
               </div>
@@ -144,7 +144,7 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
             prevSlide();
           }}
           aria-label="Foto anterior"
-          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/70 hover:bg-white hover:text-[#070D1E] text-white flex items-center justify-center transition-colors border border-white/20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+          className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F2F]/80 hover:bg-[#F6A70D] hover:text-[#0A0F2F] text-[#F7F8F7] flex items-center justify-center transition-colors border border-[#F7F8F7]/20 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
@@ -156,7 +156,7 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
             nextSlide();
           }}
           aria-label="Próxima foto"
-          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/70 hover:bg-white hover:text-[#070D1E] text-white flex items-center justify-center transition-colors border border-white/20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
+          className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0A0F2F]/80 hover:bg-[#F6A70D] hover:text-[#0A0F2F] text-[#F7F8F7] flex items-center justify-center transition-colors border border-[#F7F8F7]/20 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -173,16 +173,16 @@ export default function StoreCarousel({ onSelectImage }: StoreCarouselProps) {
               aria-selected={dotIdx === currentIndex}
               aria-label={`Ir para a foto ${dotIdx + 1}`}
               onClick={() => setCurrentIndex(dotIdx)}
-              className={`h-2 transition-all duration-300 rounded-full focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none ${
+              className={`h-2 transition-all duration-300 rounded-full focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none ${
                 dotIdx === currentIndex
-                  ? 'w-8 bg-white'
-                  : 'w-2.5 bg-white/30 hover:bg-white/60'
+                  ? 'w-8 bg-[#F6A70D]'
+                  : 'w-2.5 bg-[#F7F8F7]/30 hover:bg-[#F7F8F7]/60'
               }`}
             />
           ))}
         </div>
 
-        <span className="text-xs text-slate-400">
+        <span className="text-xs text-[#F7F8F7]/60">
           Rotação automática a cada 6s
         </span>
       </div>
