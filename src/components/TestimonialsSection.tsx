@@ -90,11 +90,6 @@ export default function TestimonialsSection() {
                   <strong className="text-[#F7F8F7] block font-semibold">{review.author}</strong>
                   <span className="text-[#F7F8F7]/60 text-[11px]">{review.city}</span>
                 </div>
-                {review.productMentioned && (
-                  <span className="text-[11px] text-[#F6A70D] bg-[#0A0F2F] px-2.5 py-1 rounded border border-[#F6A70D]/20 font-mono">
-                    {review.productMentioned}
-                  </span>
-                )}
               </div>
             </article>
           ))}

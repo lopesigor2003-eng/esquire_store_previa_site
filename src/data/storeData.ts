@@ -49,46 +49,65 @@ export interface ReviewItem {
   city: string;
 }
 
-export const HERO_SLIDES: CarouselItem[] = [
+export interface HeroMediaItem {
+  id: number;
+  type: 'image' | 'video';
+  url: string;
+  duration?: number;
+  alt: string;
+  badge: string;
+  title: string;
+  spec: string;
+}
+
+export const HERO_MEDIA_ITEMS: HeroMediaItem[] = [
   {
     id: 1,
-    url: 'https://i.postimg.cc/QMCdL5Qk/825269447-18095528219539206-4678829301434798568-n.jpg',
-    alt: 'iPhone 18 Pro Max oficial na Esquire Store',
-    badge: 'Destaque Oficial',
+    type: 'image',
+    url: 'https://i.postimg.cc/Zn74xrYM/IMG-3727.jpg',
+    duration: 6000,
+    alt: 'iPhone 18 Pro Max oficial na Esquire’s Store',
+    badge: '1ª Foto · Oficial',
     title: 'iPhone 18 Pro Max',
     spec: 'Disponível na Esquire’s Store · Torre Caridade'
   },
   {
     id: 2,
-    url: 'https://i.postimg.cc/HLnkG5w5/825269509-18095528240539206-7001953267831975526-n.jpg',
-    alt: 'iPhone 18 Pro Max Burgundy na Esquire Store',
-    badge: 'BURGUNDY',
-    title: 'BURGUNDY · O vermelho mais luxuoso',
-    spec: 'O tom mais nobre e exclusivo'
+    type: 'image',
+    url: 'https://i.postimg.cc/wMfgQhxb/IMG-5001-JPG.jpg',
+    duration: 6000,
+    alt: 'iPhone 18 Pro Max em detalhes na loja física',
+    badge: '2ª Foto · Destaque',
+    title: 'iPhone 18 Pro Max',
+    spec: 'Pronta Entrega na Sala 214'
   },
   {
     id: 3,
-    url: 'https://i.postimg.cc/3wNxMpXv/825269572-18095528273539206-5279532696421196049-n.jpg',
-    alt: 'iPhone 18 Pro Max Glacier na Esquire Store',
-    badge: 'GLACIER',
-    title: 'GLACIER · O novo queridinho',
-    spec: 'Vidro Matte Texturizado & Titânio Glacial'
+    type: 'video',
+    url: '/videos/hero-video.mp4',
+    alt: 'Vídeo Oficial do iPhone na Esquire’s Store',
+    badge: 'Vídeo Oficial',
+    title: 'Apresentação em Vídeo',
+    spec: 'Formato Original · Volume a 10%'
+  }
+];
+
+export const HERO_SLIDES: CarouselItem[] = [
+  {
+    id: 1,
+    url: 'https://i.postimg.cc/Zn74xrYM/IMG-3727.jpg',
+    alt: 'iPhone 18 Pro Max oficial na Esquire’s Store',
+    badge: '1ª Foto · Oficial',
+    title: 'iPhone 18 Pro Max',
+    spec: 'Disponível na Esquire’s Store · Torre Caridade'
   },
   {
-    id: 4,
-    url: 'https://i.postimg.cc/bvrwXbxx/825269490-18095528267539206-4337081962939189233-n.jpg',
-    alt: 'iPhone 18 Pro Max Black na Esquire Store',
-    badge: 'BLACK',
-    title: 'BLACK · O clássico que nunca falha',
-    spec: 'Titânio Escuro Corporativo de Alta Resistência'
-  },
-  {
-    id: 5,
-    url: 'https://i.postimg.cc/25ySpvQW/825270141-18095528270539206-3810210338529255626-n.jpg',
-    alt: 'iPhone 18 Pro Max Silver na Esquire Store',
-    badge: 'SILVER',
-    title: 'SILVER · Titânio Puro & Sofisticação',
-    spec: 'Acabamento minimalista de máxima elegância'
+    id: 2,
+    url: 'https://i.postimg.cc/wMfgQhxb/IMG-5001-JPG.jpg',
+    alt: 'iPhone 18 Pro Max em detalhes na loja física',
+    badge: '2ª Foto · Destaque',
+    title: 'iPhone 18 Pro Max',
+    spec: 'Pronta Entrega na Sala 214'
   }
 ];
 
