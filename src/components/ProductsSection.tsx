@@ -11,27 +11,32 @@ export default function ProductsSection() {
   const [activeGeneration, setActiveGeneration] = useState<string>('todos');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedStorageMap, setSelectedStorageMap] = useState<Record<string, string>>({});
-  const [selectedColorMap, setSelectedColorMap] = useState<Record<string, string>>({});
 
   const { ref: sectionRef, isInView } = useInView<HTMLElement>({ threshold: 0.05 });
 
   const generations = [
-    { id: 'todos', label: 'Todos' },
-    { id: 'Linha 18', label: 'Linha 18' },
-    { id: 'Linha 17', label: 'Linha 17' },
-    { id: 'Linha 16', label: 'Linha 16' },
-    { id: 'Linha 15', label: 'Linha 15' },
-    { id: 'Linha 14 & Anteriores', label: 'Linha 14 & 13' },
+    { id: 'todos', label: 'Todos', count: PRODUCTS.length },
+    { id: '2026', label: '2026', count: PRODUCTS.filter((p) => p.year === 2026).length },
+    { id: '2025', label: '2025', count: PRODUCTS.filter((p) => p.year === 2025).length },
+    { id: '2024', label: '2024', count: PRODUCTS.filter((p) => p.year === 2024).length },
+    { id: '2023', label: '2023', count: PRODUCTS.filter((p) => p.year === 2023).length },
+    { id: '2022', label: '2022', count: PRODUCTS.filter((p) => p.year === 2022).length },
+    { id: '2021', label: '2021', count: PRODUCTS.filter((p) => p.year === 2021).length },
   ];
 
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((product) => {
       const matchesGeneration =
-        activeGeneration === 'todos' || product.generation === activeGeneration;
+        activeGeneration === 'todos' ||
+        product.year.toString() === activeGeneration ||
+        product.generation === activeGeneration;
       const matchesSearch =
+        searchQuery === '' ||
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.tag.toLowerCase().includes(searchQuery.toLowerCase());
+        product.tag.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.technicalSpecs.chip.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.technicalSpecs.ram && product.technicalSpecs.ram.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesGeneration && matchesSearch;
     });
   }, [activeGeneration, searchQuery]);
@@ -40,16 +45,11 @@ export default function ProductsSection() {
     setSelectedStorageMap((prev) => ({ ...prev, [productId]: storage }));
   };
 
-  const handleColorSelect = (productId: string, colorName: string) => {
-    setSelectedColorMap((prev) => ({ ...prev, [productId]: colorName }));
-  };
-
   const generateWhatsAppMessage = (product: ProductItem) => {
     const selectedStorage = selectedStorageMap[product.id] || product.storageOptions[0] || '';
-    const selectedColor = selectedColorMap[product.id] || product.colors[0]?.name || '';
 
     return `${STORE_CONTACT.whatsappUrl}?text=${encodeURIComponent(
-      `Olá, Esquire's Store! Gostaria de consultar o valor atualizado e a disponibilidade do *${product.name}* (${selectedStorage}, Cor: ${selectedColor}) na loja física.`
+      `Olá, Esquire's Store! Gostaria de consultar o valor atualizado e a disponibilidade do *${product.name}* (${selectedStorage}) na loja física.`
     )}`;
   };
 
@@ -93,11 +93,11 @@ export default function ProductsSection() {
             isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
         >
-          {/* iOS-Style Segmented Control */}
+          {/* iOS-Style Segmented Control by Year */}
           <div
             className="flex items-center gap-1 p-1 bg-[#0F1742] border border-[#F7F8F7]/10 rounded-lg overflow-x-auto max-w-full"
             role="tablist"
-            aria-label="Filtrar iPhones por geração"
+            aria-label="Filtrar iPhones por ano"
           >
             {generations.map((gen) => {
               const isActive = activeGeneration === gen.id;
@@ -108,13 +108,22 @@ export default function ProductsSection() {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveGeneration(gen.id)}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-md whitespace-nowrap transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-md whitespace-nowrap transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[#F6A70D] focus-visible:outline-none flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-[#F6A70D] text-[#0A0F2F] font-bold shadow-sm scale-[1.02]'
                       : 'text-[#F7F8F7]/80 hover:text-[#F7F8F7] hover:bg-[#F7F8F7]/5'
                   }`}
                 >
-                  {gen.label}
+                  <span>{gen.label}</span>
+                  <span
+                    className={`text-[10px] px-1.5 py-0.2 rounded-full ${
+                      isActive
+                        ? 'bg-[#0A0F2F]/20 text-[#0A0F2F] font-black'
+                        : 'bg-[#0A0F2F] text-[#F7F8F7]/60'
+                    }`}
+                  >
+                    {gen.count}
+                  </span>
                 </button>
               );
             })}
@@ -157,7 +166,6 @@ export default function ProductsSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProducts.map((product, pIdx) => {
               const currentStorage = selectedStorageMap[product.id] || product.storageOptions[0];
-              const currentColor = selectedColorMap[product.id] || product.colors[0]?.name;
 
               return (
                 <article
@@ -168,10 +176,19 @@ export default function ProductsSection() {
                   }`}
                 >
                   <div>
-                    {/* Top Row: Generation + Delivery */}
-                    <div className="flex items-center justify-between text-xs text-[#F7F8F7]/70 mb-2">
-                      <span className="font-semibold text-[#F6A70D]">{product.generation}</span>
-                      <span>{product.delivery}</span>
+                    {/* Top Row: Year Badge + Tag + Delivery */}
+                    <div className="flex items-center justify-between text-xs text-[#F7F8F7]/70 mb-2.5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-extrabold text-[#0A0F2F] bg-[#F6A70D] px-2.5 py-0.5 rounded text-[11px] tracking-wide">
+                          {product.year}
+                        </span>
+                        <span className="text-[11px] font-semibold text-[#F7F8F7]/80">
+                          {product.tag}
+                        </span>
+                      </div>
+                      <span className="text-[10px] text-[#F7F8F7]/50 hidden sm:inline">
+                        Torre Caridade · Sala 214
+                      </span>
                     </div>
 
                     {/* Model Name */}
@@ -204,6 +221,38 @@ export default function ProductsSection() {
                           {product.technicalSpecs.camera}
                         </span>
                       </div>
+                      {product.technicalSpecs.ram && (
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-[#F7F8F7]/60 text-[11px]">RAM:</span>
+                          <span className="text-[#F7F8F7] font-medium text-right text-[11px] truncate max-w-[65%]">
+                            {product.technicalSpecs.ram}
+                          </span>
+                        </div>
+                      )}
+                      {product.technicalSpecs.battery && (
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-[#F7F8F7]/60 text-[11px]">Bateria:</span>
+                          <span className="text-[#F7F8F7] font-medium text-right text-[11px] truncate max-w-[65%]">
+                            {product.technicalSpecs.battery}
+                          </span>
+                        </div>
+                      )}
+                      {product.technicalSpecs.usb && (
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-[#F7F8F7]/60 text-[11px]">Conector:</span>
+                          <span className="text-[#F7F8F7] font-medium text-right text-[11px] truncate max-w-[65%]">
+                            {product.technicalSpecs.usb}
+                          </span>
+                        </div>
+                      )}
+                      {product.technicalSpecs.system && (
+                        <div className="flex items-baseline justify-between gap-2">
+                          <span className="text-[#F7F8F7]/60 text-[11px]">Sistema:</span>
+                          <span className="text-[#F7F8F7] font-medium text-right text-[11px] truncate max-w-[65%]">
+                            {product.technicalSpecs.system}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Storage Options Chips */}
@@ -232,44 +281,6 @@ export default function ProductsSection() {
                           </button>
                         ))}
                       </div>
-                    </div>
-
-                    {/* Color Dots */}
-                    <div className="mb-5">
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[11px] font-semibold text-[#F7F8F7]/70 uppercase tracking-wider">
-                          Cor:
-                        </span>
-                        <span className="text-xs text-[#F7F8F7]">
-                          {currentColor}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {product.colors.map((c) => {
-                          const isColorSelected = currentColor === c.name;
-                          return (
-                            <button
-                              key={c.name}
-                              type="button"
-                              title={c.name}
-                              onClick={() => handleColorSelect(product.id, c.name)}
-                              className={`w-4 h-4 rounded-full border transition-all duration-200 ${
-                                isColorSelected
-                                  ? 'ring-2 ring-[#F6A70D] scale-125 border-[#F7F8F7]'
-                                  : 'border-[#F7F8F7]/30 hover:scale-110'
-                              }`}
-                              style={{ backgroundColor: c.hex }}
-                              aria-label={`Selecionar cor ${c.name}`}
-                            />
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Quiet Trust Points */}
-                    <div className="space-y-1 text-xs text-[#F7F8F7]/70 mb-5">
-                      <p>✓ {product.condition}</p>
-                      <p>✓ {product.warranty}</p>
                     </div>
                   </div>
 
