@@ -8,8 +8,6 @@ import {
   ChevronRight,
   Play,
   Pause,
-  Volume2,
-  VolumeX,
   RotateCcw
 } from 'lucide-react';
 import { HERO_MEDIA_ITEMS, STORE_CONTACT } from '../data/storeData';
@@ -19,7 +17,6 @@ export default function HeroCarousel() {
   const { ref: heroRef, isInView } = useInView<HTMLElement>({ threshold: 0.05 });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -59,11 +56,12 @@ export default function HeroCarousel() {
         goToNext();
       }, item.duration || 6000);
     } else if (item.type === 'video') {
-      // If it's a video, initialize playback with 10% volume
+      // If it's a video, keep it strictly muted as requested
       const video = videoRef.current;
       if (video) {
         video.currentTime = 0;
-        video.volume = 0.10; // Volume pre-set to 10% as requested
+        video.muted = true;
+        video.volume = 0;
 
         const playPromise = video.play();
         if (playPromise !== undefined) {
@@ -72,9 +70,7 @@ export default function HeroCarousel() {
               setIsPlaying(true);
             })
             .catch(() => {
-              // If browser blocks unmuted autoplay, mute initially and play
               video.muted = true;
-              setIsMuted(true);
               video.play().then(() => setIsPlaying(true)).catch(() => {});
             });
         }
@@ -98,21 +94,6 @@ export default function HeroCarousel() {
     } else {
       video.pause();
       setIsPlaying(false);
-    }
-  };
-
-  // Toggle Mute / Set 10% volume
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    if (video.muted) {
-      video.muted = false;
-      video.volume = 0.10;
-      setIsMuted(false);
-    } else {
-      video.muted = true;
-      setIsMuted(true);
     }
   };
 
@@ -298,6 +279,7 @@ export default function HeroCarousel() {
                 <video
                   ref={videoRef}
                   playsInline
+                  muted
                   preload="auto"
                   onEnded={handleVideoEnded}
                   onTimeUpdate={handleTimeUpdate}
@@ -334,32 +316,19 @@ export default function HeroCarousel() {
                       <button
                         type="button"
                         onClick={togglePlayPause}
-                        className="text-white hover:text-[#F6A70D] transition-colors p-1"
+                        className="text-white hover:text-[#F6A70D] transition-colors p-1 flex items-center gap-2"
                         aria-label={isPlaying ? 'Pausar' : 'Reproduzir'}
                       >
                         {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={toggleMute}
-                        className="text-white hover:text-[#F6A70D] transition-colors flex items-center gap-1.5 p-1"
-                        aria-label={isMuted ? 'Ativar som' : 'Desativar som'}
-                      >
-                        {isMuted ? (
-                          <VolumeX className="w-4 h-4 text-slate-400" />
-                        ) : (
-                          <Volume2 className="w-4 h-4 text-[#F6A70D]" />
-                        )}
-                        <span className="text-[11px] font-mono">
-                          {isMuted ? 'Mudo' : 'Vol 10%'}
+                        <span className="text-[11px] font-medium">
+                          {isPlaying ? 'Pausar' : 'Reproduzir'}
                         </span>
                       </button>
                     </div>
 
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] text-slate-300">
-                        Clique para {isPlaying ? 'pausar' : 'reproduzir'}
+                        Vídeo mudo · Clique para {isPlaying ? 'pausar' : 'reproduzir'}
                       </span>
                     </div>
                   </div>

@@ -70,7 +70,7 @@ export const HERO_MEDIA_ITEMS: HeroMediaItem[] = [
     alt: 'Vídeo Oficial do iPhone na Esquire’s Store',
     badge: 'Vídeo Oficial',
     title: 'Apresentação em Vídeo',
-    spec: 'Formato Original · Volume a 10%'
+    spec: 'Formato Original · Silencioso'
   }
 ];
 
